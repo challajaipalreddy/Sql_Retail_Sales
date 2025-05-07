@@ -23,7 +23,7 @@ This project is designed to demonstrate SQL skills and techniques typically used
 - **Table Creation**: A table named `retail_sales` is created to store the sales data. The table structure includes columns for transaction ID, sale date, sale time, customer ID, gender, age, product category, quantity sold, price per unit, cost of goods sold (COGS), and total sale amount.
 
 ```sql
-CREATE DATABASE p1_retail_db;
+CREATE DATABASE sales_details;
 
 CREATE TABLE retail_sales
 (
@@ -75,7 +75,7 @@ total_sale is null
 
 -- Data Exploration
 
--- How many Sales we have?
+-- **How many Sales we have?**
 select category,count(*) as total_sales from sales_details 
 group by 1
 -- How many customers we have?\
@@ -122,7 +122,7 @@ The following SQL queries were developed to answer specific business questions:
 1. **Write a SQL query to retrieve all columns for sales made on '2022-11-05**:
 ```sql
 SELECT *
-FROM retail_sales
+FROM sales_details
 WHERE sale_date = '2022-11-05';
 ```
 
@@ -130,7 +130,7 @@ WHERE sale_date = '2022-11-05';
 ```sql
 SELECT 
   *
-FROM retail_sales
+FROM sales_details
 WHERE 
     category = 'Clothing'
     AND 
@@ -145,7 +145,7 @@ SELECT
     category,
     SUM(total_sale) as net_sale,
     COUNT(*) as total_orders
-FROM retail_sales
+FROM sales_details
 GROUP BY 1
 ```
 
@@ -153,13 +153,13 @@ GROUP BY 1
 ```sql
 SELECT
     ROUND(AVG(age), 2) as avg_age
-FROM retail_sales
+FROM sales_details
 WHERE category = 'Beauty'
 ```
 
 5. **Write a SQL query to find all transactions where the total_sale is greater than 1000.**:
 ```sql
-SELECT * FROM retail_sales
+SELECT * FROM sales_details
 WHERE total_sale > 1000
 ```
 
@@ -169,7 +169,7 @@ SELECT
     category,
     gender,
     COUNT(*) as total_trans
-FROM retail_sales
+FROM sales_details
 GROUP 
     BY 
     category,
@@ -190,7 +190,7 @@ SELECT
     EXTRACT(MONTH FROM sale_date) as month,
     AVG(total_sale) as avg_sale,
     RANK() OVER(PARTITION BY EXTRACT(YEAR FROM sale_date) ORDER BY AVG(total_sale) DESC) as rank
-FROM retail_sales
+FROM sales_details
 GROUP BY 1, 2
 ) as t1
 WHERE rank = 1
@@ -201,7 +201,7 @@ WHERE rank = 1
 SELECT 
     customer_id,
     SUM(total_sale) as total_sales
-FROM retail_sales
+FROM sales_details
 GROUP BY 1
 ORDER BY 2 DESC
 LIMIT 5
@@ -212,7 +212,7 @@ LIMIT 5
 SELECT 
     category,    
     COUNT(DISTINCT customer_id) as cnt_unique_cs
-FROM retail_sales
+FROM sales_details
 GROUP BY category
 ```
 
@@ -227,7 +227,7 @@ SELECT *,
         WHEN EXTRACT(HOUR FROM sale_time) BETWEEN 12 AND 17 THEN 'Afternoon'
         ELSE 'Evening'
     END as shift
-FROM retail_sales
+FROM sales_details
 )
 SELECT 
     shift,
@@ -341,9 +341,9 @@ This project is part of my portfolio, showcasing the SQL skills essential for da
 
 For more content on SQL, data analysis, and other data-related topics, make sure to follow me on social media and join our community:
 
-- **YouTube**: [Subscribe to my channel for tutorials and insights](https://www.youtube.com/@zero_analyst)
-- **Instagram**: [Follow me for daily tips and updates](https://www.instagram.com/zero_analyst/)
-- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/najirr)
-- **Discord**: [Join our community to learn and grow together](https://discord.gg/36h5f2Z5PK)
+
+
+- **LinkedIn**: [Connect with me professionally](https://www.linkedin.com/in/challa-jaipal-reddy-6a03062a3/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BZ3BSMCsbTdytsAkZpF9w1w%3D%3D)
+
 
 Thank you for your support, and I look forward to connecting with you!
