@@ -236,8 +236,8 @@ FROM hourly_sale
 GROUP BY shift
 ```
 
-Q11.** What is the average quantity sold per category per gender? **
-'''sql
+Q11.**What is the average quantity sold per category per gender?**
+```sql
 SELECT 
     category,
     gender,
@@ -248,7 +248,66 @@ GROUP BY
     category, gender
 ORDER BY 
     category, gender;
-    '''
+   ```
+
+Q12.**What is the total revenue and total COGS (Cost of Goods Sold) by category?**
+```sql
+SELECT 
+    category,
+    SUM(total_sale) AS total_revenue,
+    SUM(cogs) AS total_cogs
+FROM 
+    sales_details
+GROUP BY 
+    category;
+```
+
+ Q13.**Which day of the week has the highest number of sales?**
+```sql
+
+SELECT 
+    TO_CHAR(sale_date, 'Day') AS weekday,
+    COUNT(*) AS total_sales
+FROM 
+    sales_details
+GROUP BY 
+    weekday
+ORDER BY 
+    total_sales DESC;
+```
+
+Q14.  **What is the peak hour for sales?**
+```sql
+SELECT 
+    EXTRACT(HOUR FROM sale_time) AS hour_of_day,
+    COUNT(*) AS total_sales
+FROM 
+    sales_details
+GROUP BY 
+    hour_of_day
+ORDER BY 
+    total_sales DESC;
+```
+
+
+
+Q15..**Which age group generates the highest sales?**
+```sql
+SELECT 
+    CASE
+        WHEN age < 20 THEN 'Teen (<20)'
+        WHEN age BETWEEN 20 AND 30 THEN 'Young Adult (20-30)'
+        WHEN age BETWEEN 31 AND 50 THEN 'Adult (31-50)'
+        ELSE 'Senior (50+)'
+    END AS age_group,
+    SUM(total_sale) AS total_sales
+FROM 
+    sales_details
+GROUP BY 
+    age_group
+ORDER BY 
+    total_sales DESC;
+```
 
 ## Findings
 
